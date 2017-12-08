@@ -71,16 +71,17 @@ begin
   Enum := AEnum;
 end;
 
-procedure RegisterConverter;
-var
-  LConverter: TConverterEvent;
-  LReverter: TReverterEvent;
-begin
-  LConverter := TConverterEvent.Create();
-  LReverter  := TReverterEvent.Create();
-  TJSONConverters.AddConverter(LConverter);
-end;
-
-initialization
-  RegisterConverter;
+// This is work in progress...
+//procedure RegisterConverter;
+//var
+//  LConverter: TConverterEvent;
+//  LReverter: TReverterEvent;
+//begin
+//  LConverter := TConverterEvent.Create();
+//  LReverter  := TReverterEvent.Create();
+//  TJSONConverters.AddConverter(LConverter);
+//end;
+//
+//initialization
+//  RegisterConverter;
 end.
