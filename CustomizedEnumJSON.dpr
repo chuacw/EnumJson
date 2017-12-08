@@ -16,19 +16,19 @@ begin
   LSomeClass1 := TSomeClass.Create;
   LSomeClass2 := nil;
   try
-    LSomeClass1.Option1 := GalaxyFish;
-    LSomeClass1.Option2 := TomorrowNeverComes;
-    LSomeClass1.Enum := suTwo;
-    LSomeClass1.FunnyEnum := TomorrowNeverComes;
+    LSomeClass1.FOption1 := GalaxyFish;
+    LSomeClass1.FOption2 := TomorrowNeverComes;
+    LSomeClass1.FEnum := suTwo;
+    LSomeClass1.FFunnyEnum := TomorrowNeverComes;
 
     LJson := TJson.ObjectToJsonString(LSomeClass1);
     WriteLn('The marshalled value is: ', LJson);
     LSomeClass2 := TJson.JsonToObject<TSomeClass>(lJson);
 
-    Assert(LSomeClass1.Option1 = LSomeClass2.Option1);
-    Assert(LSomeClass1.Option2 = LSomeClass2.Option2);
-    Assert(LSomeClass1.Enum = LSomeClass2.Enum);
-    Assert(LSomeClass1.FunnyEnum = LSomeClass2.FunnyEnum);
+    Assert(LSomeClass1.FOption1 = LSomeClass2.FOption1);
+    Assert(LSomeClass1.FOption2 = LSomeClass2.FOption2);
+    Assert(LSomeClass1.FEnum = LSomeClass2.FEnum);
+    Assert(LSomeClass1.FFunnyEnum = LSomeClass2.FFunnyEnum);
 
     WriteLn('Successfully marshalled back!');
 

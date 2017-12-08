@@ -22,14 +22,14 @@ type
   TSomeClass = class
   public
     [JSONReflect(ctString, rtString, TFunnyEnumInterceptor, nil, true)]
-    Option1: TFunnyEnums;
+    FOption1: TFunnyEnums;
 
     [JSONReflect(ctString, rtString, TFunnyEnumInterceptor, nil, true)]
-    Option2: TFunnyEnums;
+    FOption2: TFunnyEnums;
 
     // Normal enums
-    Enum: TSampleEnum;
-    FunnyEnum: TFunnyEnums;
+    FEnum: TSampleEnum;
+    FFunnyEnum: TFunnyEnums;
   end;
 
 implementation
