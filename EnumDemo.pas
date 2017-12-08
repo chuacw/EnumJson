@@ -13,7 +13,7 @@ type
   // This is because Delphi doesn't support attributes on enums... yet!
   // Declare a new class, as you can't use generics on attributes due to a compiler bug.
   // Otherwise, you would be able to do
-  // JSONReflect(ctString, rtString, TEnumInterceptor<TFunnyEnums>, nil, true)] directly on the field itself instead
+  // [JSONReflect(ctString, rtString, TEnumInterceptor<TFunnyEnums>, nil, true)] directly on the field itself instead
   // of
   // [JSONReflect(ctString, rtString, TFunnyEnumInterceptor, nil, true)]
   [EnumAs('High...lander!'), EnumAs('Galaxy Fish???'), EnumAs('James Bond!')]
