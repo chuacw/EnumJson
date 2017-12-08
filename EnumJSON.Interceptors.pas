@@ -49,13 +49,11 @@ end;
 function TEnumInterceptor<T>.StringConverter(Data: TObject; Field: String): string;
 var
   LRttiContext: TRttiContext;
-  LTValue: TValue;
   LValue: Integer;
-  LOption: T;
-  LRttiType, LType: TRttiType;
+  LType: TRttiType;
   LRttiAttrs: TArray<TCustomAttribute>;
-  LRttiAttr: TCustomAttribute;
 begin
+  LRttiContext := TRttiContext.Create;
   LType := LRttiContext.GetType(ClassType);
   LRttiAttrs := LType.GetAttributes;
   LValue := LRttiContext.GetType(Data.ClassType).GetField(Field).GetValue(Data).AsOrdinal;
@@ -74,6 +72,7 @@ var
   I: Integer;
   LField: TRttiField;
 begin
+  LRttiContext := TRttiContext.Create;
   I := 0;
   LInterceptorType := LRttiContext.GetType(ClassType);
   LAttrs := LInterceptorType.GetAttributes;

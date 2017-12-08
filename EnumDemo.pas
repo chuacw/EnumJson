@@ -2,7 +2,7 @@
 unit EnumDemo;
 
 interface
-uses EnumJSON.Interceptors, REST.JsonReflect;
+uses EnumJSON.Interceptors, REST.Json, REST.JsonReflect, REST.Json.Types;
 
 type
 
@@ -16,10 +16,10 @@ type
   // JSONReflect(ctString, rtString, TEnumInterceptor<TFunnyEnums>, nil, true)] directly on the field itself instead
   // of
   // [JSONReflect(ctString, rtString, TFunnyEnumInterceptor, nil, true)]
-  [EnumAs('Only one'), EnumAs('Two fish'), EnumAs('Godzilla')]
+  [EnumAs('High...lander!'), EnumAs('Galaxy Fish???'), EnumAs('James Bond!')]
   TFunnyEnumInterceptor = class(TEnumInterceptor<TFunnyEnums>)end;
 
-  TSomeClass = class
+  TSomeClass1 = class
   public
     [JSONReflect(ctString, rtString, TFunnyEnumInterceptor, nil, true)]
     FOption1: TFunnyEnums;
@@ -32,6 +32,36 @@ type
     FFunnyEnum: TFunnyEnums;
   end;
 
+  TSomeClass2 = class
+    [JSONReflect(ctString, rtString, TFunnyEnumInterceptor, nil, true)]
+    [JsonNameAttribute('NewName1')]
+    Option1: TFunnyEnums;
+
+    [JSONReflect(ctString, rtString, TFunnyEnumInterceptor, nil, true)]
+    [JSONName('NewName2')]
+    Option2: TFunnyEnums;
+
+    // Normal enums
+    [JSONName('Third Name')]
+    Enum: TSampleEnum;
+
+    [JsonName('Fourth Name')]
+    FunnyEnum: TFunnyEnums;
+  public
+    constructor Create(AOption1, AOption2, AFunnyEnum: TFunnyEnums; AEnum: TSampleEnum);
+  end;
+
 implementation
+
+{ TSomeClass2 }
+
+constructor TSomeClass2.Create(AOption1, AOption2, AFunnyEnum: TFunnyEnums;
+  AEnum: TSampleEnum);
+begin
+  Option1 := AOption1;
+  Option2 := AOption2;
+  FunnyEnum := AFunnyEnum;
+  Enum := AEnum;
+end;
 
 end.

@@ -9,32 +9,51 @@ uses
   EnumJSON.Interceptors in 'EnumJSON.Interceptors.pas';
 
 var
-  LSomeClass1, LSomeClass2: TSomeClass;
+  LSomeClass11, LSomeClass12: TSomeClass1;
+  LSomeClass21, LSomeClass22: TSomeClass2;
   LJson: string;
 begin
 
-  LSomeClass1 := TSomeClass.Create;
-  LSomeClass2 := nil;
+  LSomeClass11 := TSomeClass1.Create;
+  LSomeClass12 := nil;
+
+  LSomeClass21 := TSomeClass2.Create(Highlander, GalaxyFish, TomorrowNeverComes, suThree);
+  LSomeClass22 := nil;
   try
-    LSomeClass1.FOption1 := GalaxyFish;
-    LSomeClass1.FOption2 := TomorrowNeverComes;
-    LSomeClass1.FEnum := suTwo;
-    LSomeClass1.FFunnyEnum := TomorrowNeverComes;
+    LSomeClass11.FOption1 := GalaxyFish;
+    LSomeClass11.FOption2 := TomorrowNeverComes;
+    LSomeClass11.FEnum := suTwo;
+    LSomeClass11.FFunnyEnum := TomorrowNeverComes;
 
-    LJson := TJson.ObjectToJsonString(LSomeClass1);
+    LJson := TJson.ObjectToJsonString(LSomeClass11);
     WriteLn('The marshalled value is: ', LJson);
-    LSomeClass2 := TJson.JsonToObject<TSomeClass>(lJson);
+    LSomeClass12 := TJson.JsonToObject<TSomeClass1>(LJson);
 
-    Assert(LSomeClass1.FOption1 = LSomeClass2.FOption1);
-    Assert(LSomeClass1.FOption2 = LSomeClass2.FOption2);
-    Assert(LSomeClass1.FEnum = LSomeClass2.FEnum);
-    Assert(LSomeClass1.FFunnyEnum = LSomeClass2.FFunnyEnum);
+    Assert(LSomeClass11.FOption1 = LSomeClass12.FOption1);
+    Assert(LSomeClass11.FOption2 = LSomeClass12.FOption2);
+    Assert(LSomeClass11.FEnum = LSomeClass12.FEnum);
+    Assert(LSomeClass11.FFunnyEnum = LSomeClass12.FFunnyEnum);
 
     WriteLn('Successfully marshalled back!');
+    WriteLn;
+
+    LJson := TJson.ObjectToJsonString(LSomeClass21);
+    WriteLn('The marshalled value is: ', LJson);
+    LSomeClass22 := TJson.JsonToObject<TSomeClass2>(LJson);
+
+    Assert(LSomeClass21.Option1 = LSomeClass22.Option1);
+    Assert(LSomeClass21.Option2 = LSomeClass22.Option2);
+    Assert(LSomeClass21.Enum    = LSomeClass22.Enum);
+    Assert(LSomeClass21.FunnyEnum = LSomeClass22.FunnyEnum);
+
+    WriteLn('Successfully marshalled back!');
+    ReadLn;
 
   finally
-    LSomeClass2.Free;
-    LSomeClass1.Free;
+    LSomeClass22.Free;
+    LSomeClass21.Free;
+    LSomeClass12.Free;
+    LSomeClass11.Free;
   end;
 
 end.
