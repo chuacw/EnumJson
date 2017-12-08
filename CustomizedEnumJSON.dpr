@@ -14,6 +14,7 @@ var
 begin
 
   LSomeClass1 := TSomeClass.Create;
+  LSomeClass2 := nil;
   try
     LSomeClass1.Option1 := GalaxyFish;
     LSomeClass1.Option2 := TomorrowNeverComes;
