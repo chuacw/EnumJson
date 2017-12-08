@@ -14,23 +14,26 @@ var
 begin
 
   LSomeClass1 := TSomeClass.Create;
-  LSomeClass1.Option1 := GalaxyFish;
-  LSomeClass1.Option2 := TomorrowNeverComes;
-  LSomeClass1.Enum := suTwo;
-  LSomeClass1.FunnyEnum := TomorrowNeverComes;
+  try
+    LSomeClass1.Option1 := GalaxyFish;
+    LSomeClass1.Option2 := TomorrowNeverComes;
+    LSomeClass1.Enum := suTwo;
+    LSomeClass1.FunnyEnum := TomorrowNeverComes;
 
-  LJson := TJson.ObjectToJsonString(LSomeClass1);
-  WriteLn('The marshalled value is: ', LJson);
-  LSomeClass2 := TJson.JsonToObject<TSomeClass>(lJson);
+    LJson := TJson.ObjectToJsonString(LSomeClass1);
+    WriteLn('The marshalled value is: ', LJson);
+    LSomeClass2 := TJson.JsonToObject<TSomeClass>(lJson);
 
-  Assert(LSomeClass1.Option1 = LSomeClass2.Option1);
-  Assert(LSomeClass1.Option2 = LSomeClass2.Option2);
-  Assert(LSomeClass1.Enum = LSomeClass2.Enum);
-  Assert(LSomeClass1.FunnyEnum = LSomeClass2.FunnyEnum);
+    Assert(LSomeClass1.Option1 = LSomeClass2.Option1);
+    Assert(LSomeClass1.Option2 = LSomeClass2.Option2);
+    Assert(LSomeClass1.Enum = LSomeClass2.Enum);
+    Assert(LSomeClass1.FunnyEnum = LSomeClass2.FunnyEnum);
 
-  WriteLn('Successfully marshalled back!');
+    WriteLn('Successfully marshalled back!');
 
-  LSomeClass2.Free;
-  LSomeClass1.Free;
+  finally
+    LSomeClass2.Free;
+    LSomeClass1.Free;
+  end;
 
 end.
