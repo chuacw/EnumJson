@@ -31,17 +31,25 @@ type
     [JSONReflect(ctString, rtString, TFunnyEnumInterceptor1, nil, true)]
     FOption1: TFunnyEnums;
 
+    [JSONReflect(ctString, rtString, TFunnyEnumInterceptor2, nil, true)]
+    // You can put different interceptors on the same enum but different fields, to get different results!
     FOption2: TFunnyEnums;
 
+    [JSONReflect(ctString, rtString, TSampleEnumInterceptor, nil, true)]
     FEnum: TSampleEnum;
+
+    // Normal enum
     FFunnyEnum: TFunnyEnums;
   end;
 
   TSomeClass2 = class
+    [JSONReflect(ctString, rtString, TFunnyEnumInterceptor1, nil, true), JsonName('NewName1')]
     Option1: TFunnyEnums;
 
+    [JSONReflect(ctString, rtString, TFunnyEnumInterceptor1, nil, true), JSONName('NewName2')]
     Option2: TFunnyEnums;
 
+    [JSONReflect(ctString, rtString, TSampleEnumInterceptor, nil, true), JSONName('Third Name')]
     Enum: TSampleEnum;
 
     [JsonName('Fourth Name')]
@@ -63,4 +71,16 @@ begin
   Enum := AEnum;
 end;
 
+procedure RegisterConverter;
+var
+  LConverter: TConverterEvent;
+  LReverter: TReverterEvent;
+begin
+  LConverter := TConverterEvent.Create();
+  LReverter  := TReverterEvent.Create();
+  TJSONConverters.AddConverter(LConverter);
+end;
+
+initialization
+  RegisterConverter;
 end.
