@@ -4,7 +4,7 @@ program CustomizedEnumJSON;
 {$R *.res}
 
 uses
-  REST.Json,
+  REST.Json,  System.SysUtils,
   EnumDemo in 'EnumDemo.pas',
   EnumJSON.Interceptors in 'EnumJSON.Interceptors.pas';
 

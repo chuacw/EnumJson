@@ -18,7 +18,7 @@ type
   private
     FNames: TArray<string>;
   public
-    constructor Create(const ANames: TArray<string>); overload;
+    constructor Create(const ANames: array of const); overload;
     property Names: TArray<string> read FNames;
   end;
 
@@ -41,9 +41,8 @@ begin
   Result := FName;
 end;
 
-constructor EnumsAsAttribute.Create(const ANames: TArray<string>);
+constructor EnumsAsAttribute.Create(const ANames: array of const);
 begin
-  FNames := ANames;
 end;
 
 function TEnumInterceptor<T>.StringConverter(Data: TObject; Field: String): string;
@@ -83,7 +82,7 @@ begin
           if LAttr.ToString = Arg then
             begin
               LRttiType := TypeInfo(T); // RTTI for the Enum
-              LAbsValue := I;
+              LAbsValue := I;           // Each enum is a byte
               LValue := TValue.From<T>(LEnum);
               LField := LRttiContext.GetType(Data.ClassType).GetField(Field);
               LField.SetValue(Data, LValue);
